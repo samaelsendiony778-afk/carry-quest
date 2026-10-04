@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f4efe4;
+  --color-surface: #fffdf8;
+  --color-ink: #1c2430;
+  --color-muted: #5c6b7a;
+  --color-line: #e6dccb;
+  --color-green: #1f8a4c;
+  --color-green-soft: #e7f6ee;
+  --color-on-green: #f4fff8;
+  --color-teal: #149aab;
+  --color-teal-soft: #e6f7f9;
+  --color-carry: #e23b3b;
+  --color-carry-soft: #fdecec;
+  --color-on-carry: #fff8f8;
+  --color-gold: #c4840a;
+  --color-gold-soft: #fff6df;
+  --font-sans: "Cairo", "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-digit: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+}
+
+.tap {
+  transition: scale 150ms ease-out;
+}
+
+.tap:active:not(:disabled) {
+  scale: 0.96;
+}
+
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.anim-pop {
+  animation: pop 280ms ease-out;
+}
+
+.anim-shake {
+  animation: shake 380ms ease-out;
+}
+
+.anim-fly {
+  animation: fly-up 320ms ease-out;
+}
+
+.confetti {
+  pointer-events: none;
+}
+
+.confetti i {
+  position: absolute;
+  top: 0;
+  width: 0.5rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  animation: confetti-fall 800ms ease-in forwards;
+}
+
+.confetti i:nth-child(1) { left: 8%; background: var(--color-green); }
+.confetti i:nth-child(2) { left: 18%; background: var(--color-gold); animation-delay: 40ms; }
+.confetti i:nth-child(3) { left: 30%; background: var(--color-teal); animation-delay: 80ms; }
+.confetti i:nth-child(4) { left: 42%; background: var(--color-carry); }
+.confetti i:nth-child(5) { left: 54%; background: var(--color-green); animation-delay: 60ms; }
+.confetti i:nth-child(6) { left: 66%; background: var(--color-gold); animation-delay: 20ms; }
+.confetti i:nth-child(7) { left: 76%; background: var(--color-teal); animation-delay: 100ms; }
+.confetti i:nth-child(8) { left: 88%; background: var(--color-carry); animation-delay: 30ms; }
+
+@keyframes pop {
+  0% { transform: scale(0.7); }
+  70% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  30% { transform: translateX(-7px); }
+  60% { transform: translateX(6px); }
+}
+
+@keyframes fly-up {
+  0% { transform: translateY(10px) scale(0.85); opacity: 0.4; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(4.5rem) rotate(160deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-pop,
+  .anim-shake,
+  .anim-fly,
+  .confetti i {
+    animation: none;
+  }
+}
